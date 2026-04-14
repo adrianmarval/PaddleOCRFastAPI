@@ -37,3 +37,4 @@ COPY . /app
 
 # 启动命令
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--workers", "2", "--log-config", "./log_conf.yaml"]
+cffi
