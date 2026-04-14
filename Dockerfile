@@ -35,14 +35,5 @@ RUN python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade
 # 复制项目文件
 COPY . /app
 
-# 创建模型目录并解压模型文件
-RUN mkdir -p /root/.paddleocr/whl/cls/ && \
-    mkdir -p /root/.paddleocr/whl/det/ch/ && \
-    mkdir -p /root/.paddleocr/whl/rec/ch/ && \
-    tar xf /app/pp-ocrv4/ch_ppocr_mobile_v2.0_cls_infer.tar -C /root/.paddleocr/whl/cls/ 2>/dev/null && \
-    tar xf /app/pp-ocrv4/ch_PP-OCRv4_det_infer.tar -C /root/.paddleocr/whl/det/ch/ && \
-    tar xf /app/pp-ocrv4/ch_PP-OCRv4_rec_infer.tar -C /root/.paddleocr/whl/rec/ch/ && \
-    rm -rf /app/pp-ocrv4/*.tar
-
 # 启动命令
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--workers", "2", "--log-config", "./log_conf.yaml"]
