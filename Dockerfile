@@ -19,7 +19,7 @@ RUN sed -i "s@http://deb.debian.org@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/
         libglib2.0-0 \
         libsm6 \
         libxrender1 \
-        libxext6 && \
+        libxext6 \
         patch && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
