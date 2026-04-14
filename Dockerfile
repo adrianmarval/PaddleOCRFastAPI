@@ -21,9 +21,7 @@ RUN sed -i "s@http://deb.debian.org@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/
         libxrender1 \
         libxext6 \
         patch \
-        gcc \
-        g++ \
-        make \
+        build-essential \
         python3-dev \
         libffi-dev && \
     apt-get clean && \
