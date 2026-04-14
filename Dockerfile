@@ -23,7 +23,9 @@ RUN sed -i "s@http://deb.debian.org@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/
         patch \
         gcc \
         g++ \
-        python3-dev && \
+        make \
+        python3-dev \
+        libffi-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
