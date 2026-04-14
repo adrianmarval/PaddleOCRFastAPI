@@ -22,4 +22,3 @@ pyyaml
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
-cffi
