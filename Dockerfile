@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
 
-# Forzar reconstruccion limpia v3
+# Forzar reconstruccion limpia v5 - Con libffi-dev restaurado
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libgl1 \
@@ -15,7 +15,8 @@ RUN apt-get update && \
         libxext6 \
         patch \
         build-essential \
-        python3-dev && \
+        python3-dev \
+        libffi-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
