@@ -20,7 +20,10 @@ RUN sed -i "s@http://deb.debian.org@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/
         libsm6 \
         libxrender1 \
         libxext6 \
-        patch && \
+        patch \
+        gcc \
+        g++ \
+        python3-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
