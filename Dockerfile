@@ -1,39 +1,27 @@
-# 使用 Python 3.8 slim 基础镜像
 FROM python:3.8-slim-bullseye
 
-# 暴露端口
-EXPOSE 8000
-
-# 设置工作目录
 WORKDIR /app
 
-# 复制依赖文件并安装系统依赖
 COPY requirements.txt /app/requirements.txt
 
-# 换源并安装系统依赖
-RUN sed -i "s@http://deb.debian.org@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
-    apt-get update && \
+# Forzar reconstruccion limpia v2
+# Instalamos solo las dependencias visuales de Linux desde los repositorios globales
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libgl1 \
         libgomp1 \
         libglib2.0-0 \
         libsm6 \
         libxrender1 \
-        libxext6 \
-        patch \
-        build-essential \
-        python3-dev \
-        libffi-dev && \
+        libxext6 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# 换源并安装 Python 依赖
-RUN python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip && \
-    pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
+# Instalamos Python usando el PyPI oficial para obtener los binarios directos (Wheels)
+RUN python3 -m pip install --upgrade pip && \
     pip3 install --no-cache-dir -r requirements.txt
 
-# 复制项目文件
 COPY . /app
 
-# 启动命令
+# Comando de arranque original
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--workers", "2", "--log-config", "./log_conf.yaml"]
